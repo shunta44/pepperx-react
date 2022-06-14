@@ -1,0 +1,240 @@
+li{
+    list-style: none;
+}
+
+.shoplist{
+    padding: 0 10px; 
+}
+
+body{
+    background-color: rgb(135, 238, 204);
+}
+
+.load{
+    text-align: center;
+    margin: 0 auto;
+    margin: 200px 0;
+}
+
+.icon{
+    margin: 0 auto;
+}
+
+@media (min-width:380px) {
+    .back{
+        background-image: url('./meatphoto.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100vw;
+        height: 100vh;
+        padding: 20px 0;
+    }
+}
+
+@media (max-width:379px) {
+    .back{
+        background-image: url('./meatphoto.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 20px 0;
+        /* height: 100vh; */
+        width: 100vw;
+    }
+}
+
+
+.btn2{
+    margin: 5px;
+}
+
+.btn2:hover{
+    opacity: 0.8;
+}
+
+.page{
+    text-align: center;
+}
+.page2{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.select{
+    margin: 20px 0;
+    margin-right: 50px;
+    
+}
+.select2{
+    background-color: white;
+    margin-right: 50px;
+}
+
+.area{
+    /* background-color: blueviolet; */
+    margin: 0 20px;
+}
+
+.error{
+    white-space:pre;
+    /* white-space:pre-wrap; */
+    /* white-space:pre-line; */
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.first{
+    white-space:pre;
+    font-weight: bold;
+font-size: large;
+text-align: center;
+padding: 10px;
+/* background-color: blueviolet; */
+}
+
+.firstcondition{
+    font-size: small;
+    font-weight: bold;
+}
+
+.main{
+    display: flex;
+}
+
+.url{
+    margin: 10px
+}
+
+.url p{
+    font-weight: bold;
+    font-size: large;
+    /* white-space: nowrap; */
+}
+
+.url a{
+    font-size: large;
+    text-decoration: none;
+    padding: 5px;
+    background-color:rgb(211, 211, 241);
+    border-radius: 10px;
+}
+
+.url a:hover{
+    opacity: 0.5;
+}
+
+.item p{
+    margin-top: 10px;
+    line-height: 20px;
+    /* font-weight:300; */
+}
+
+.contents{
+    display: flex;
+    /* justify-content: space-between; */
+    margin: 5px;
+    background-color: pink;
+}
+
+.top{
+    background-color: black;
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn Button{
+    /* margin-left: 20px;
+    margin-top: 10px; */
+    margin: 20px 10px;
+    width: 200px;
+    /* font-size: small; */
+}
+.btnx Button{
+    /* margin-left: 20px;
+    margin-top: 10px; */
+    margin: 20px 10px;
+    width: 200px;
+    /* font-size: small; */
+}
+
+.btn{
+    /* background-color: blue; */
+    text-align: center;
+}
+.btnx{
+    /* background-color: blue; */
+    text-align: center;
+    margin: 30px;
+}
+
+.in{
+    margin: 5px;
+}
+
+.in input{
+    height: 18px;
+}
+
+.toppage{
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 90px;
+    color: blue;
+    /* margin: 20px; */
+    margin: 0 30px;
+}
+
+.backbtn{
+    text-decoration: none;
+    line-height: 50px;
+    margin: 20px;
+    color: blue;
+    font-weight: bold;
+}
+.backbtn:hover{
+    opacity: 0.5;
+}
+
+
+@media (max-width:600px) {
+    .btn Button{
+        margin: 10px 5px;
+        width: 150px;
+        /* background-color: blueviolet; */
+    }
+    .btnx Button{
+        margin: 10px 5px;
+        width: 150px;
+        /* background-color: blueviolet; */
+    }
+    
+    .select{
+        margin-left: 20px;
+        
+    }
+    
+}
+
+@media (min-width:1024px) {
+    .btn Button{
+        margin: 10px 5px;
+        width: 170px;
+        /* background-color: blueviolet; */
+    }
+    .btnx Button{
+        margin: 30px 5px;
+        width: 150px;
+        /* background-color: blueviolet; */
+    }
+    
+    .select{
+        margin-left: 20px;
+        
+    } 
+    
+}
+
+
