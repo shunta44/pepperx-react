@@ -38,8 +38,9 @@ root.render(
 {/* <Provider> */}
 {/* <Provider2> */}
 <Routes>
-<Route path={`/`} element={<BasicMenux />} />
-  <Route path='/Tokyo' element={<Tokyo/>}/>
+<Route path={`https://shunta44.github.io/pepperx-react/`} element={<BasicMenux />} />
+{/* <Route path={`/`} element={<BasicMenux />} /> */}
+  <Route path='https://shunta44.github.io/pepperx-react/Tokyo' element={<Tokyo/>}/>
 
   {/* ファイル分ける場合 */}
   {/* <Route path='/North' element={<North/>}/>
