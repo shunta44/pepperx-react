@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/shunta44/pepper-react.git/static/css/main.774773fa.css",
-    "main.js": "/shunta44/pepper-react.git/static/js/main.839c0701.js",
-    "static/js/787.c2045793.chunk.js": "/shunta44/pepper-react.git/static/js/787.c2045793.chunk.js",
-    "static/media/meatphoto.jpg": "/shunta44/pepper-react.git/static/media/meatphoto.eaecd8851fa120d75b57.jpg",
-    "static/media/logo.svg": "/shunta44/pepper-react.git/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/shunta44/pepper-react.git/index.html",
-    "main.774773fa.css.map": "/shunta44/pepper-react.git/static/css/main.774773fa.css.map",
-    "main.839c0701.js.map": "/shunta44/pepper-react.git/static/js/main.839c0701.js.map",
-    "787.c2045793.chunk.js.map": "/shunta44/pepper-react.git/static/js/787.c2045793.chunk.js.map"
+    "main.css": "/shunta44/pepperx-react/static/css/main.d9b4ad64.css",
+    "main.js": "/shunta44/pepperx-react/static/js/main.ba72028d.js",
+    "static/js/787.c2045793.chunk.js": "/shunta44/pepperx-react/static/js/787.c2045793.chunk.js",
+    "static/media/meatphoto.jpg": "/shunta44/pepperx-react/static/media/meatphoto.eaecd8851fa120d75b57.jpg",
+    "static/media/logo.svg": "/shunta44/pepperx-react/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/shunta44/pepperx-react/index.html",
+    "main.d9b4ad64.css.map": "/shunta44/pepperx-react/static/css/main.d9b4ad64.css.map",
+    "main.ba72028d.js.map": "/shunta44/pepperx-react/static/js/main.ba72028d.js.map",
+    "787.c2045793.chunk.js.map": "/shunta44/pepperx-react/static/js/787.c2045793.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.774773fa.css",
-    "static/js/main.839c0701.js"
+    "static/css/main.d9b4ad64.css",
+    "static/js/main.ba72028d.js"
   ]
 }

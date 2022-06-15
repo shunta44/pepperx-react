@@ -2,7 +2,7 @@
   "name": "hot",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/shunta44/pepper-react.git/",
+  "homepage": "https://github.com/shunta44/pepperx-react/",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
