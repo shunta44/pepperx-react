@@ -3,40 +3,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import style from '../style.module.css'
 
-import { Context } from "./globalstate";
-import { useContext } from "react";
-
-import Providerx from "./customfook";
-
 
 const Preselect=memo((props)=>{
-  console.log(222)
-
-    // const{close,branch,state,open,open2,open3,open4,open5,open6,open7,open8,
-    //       pre,pre2,pre3,pre4,pre5,pre6,pre7,pre8,pp}=props
-
-    const{close,state}=props;
-
-          //   console.log(state)
-
-          // useContextから呼び出し
-          const {jack2,data}=useContext(Context)
- 
-          // カスタムフックから呼び出し
-          // const rock=Providerx()
-          // const [{jack5},data2]=Providerx()
-          
-          // console.log(val)
-          // console.log(pp)
-          // console.log(jack2)
-          // console.log(jack5)
-          // console.log(data2)
-          // console.log(rock)
-          // console.log(uuu.data2)
-          // console.log(uuu.jack5)
-          // console.log(rock[0].jack5)
-        
-
+  const{close,state,branch}=props;
+  
   const open = Boolean(state.contents);
   const open2 = Boolean(state.contents2);
   const open3 = Boolean(state.contents3);
@@ -46,7 +16,7 @@ const Preselect=memo((props)=>{
   const open7 = Boolean(state.contents7);
   const open8 = Boolean(state.contents8);
 
-const areacode=data.map(i=>i.name)
+const areacode=state.data.map(i=>i.name)
 
 // // 東京
 const aa=areacode.splice(0,7)
@@ -79,8 +49,7 @@ return(
     >
         <div className={style.ss} onMouseLeave={close}>
         {dd.map((i,index)=>(
-      <MenuItem onClick={jack2} id={index} value={10} key={index}>{i}</MenuItem>
-      // <MenuItem onClick={rock.jack5} id={index} value={10} key={index}>{i}</MenuItem>
+      <MenuItem onClick={branch} id={index} value={10} key={index}>{i}</MenuItem>
             ))}
         </div>
     </Menu>
@@ -98,7 +67,7 @@ return(
     >
         <div className={style.ss} onMouseLeave={close}>
         {aa.map((i,index)=>(
-      <MenuItem onClick={jack2} id={index} value={20} key={index}>{i}</MenuItem>      
+      <MenuItem onClick={branch} id={index} value={20} key={index}>{i}</MenuItem>      
             ))}
     </div>
     </Menu>
@@ -116,7 +85,7 @@ return(
     >
         <div className={style.ss} onMouseLeave={close}>
         {ee.map((i,index)=>(
-      <MenuItem onClick={jack2} id={index} value={30} key={index}>{i}</MenuItem>
+      <MenuItem onClick={branch} id={index} value={30} key={index}>{i}</MenuItem>
             ))}
     </div>
     </Menu>
@@ -134,7 +103,7 @@ return(
     >
         <div className={style.ss} onMouseLeave={close}>
         {cc.map((i,index)=>(
-        <MenuItem onClick={jack2} id={index} value={40} key={index}>{i}</MenuItem>
+        <MenuItem onClick={branch} id={index} value={40} key={index}>{i}</MenuItem>
             ))}
     </div>
     </Menu>
@@ -152,7 +121,7 @@ return(
     >
         <div className={style.ss} onMouseLeave={close}>
         {bb.map((i,index)=>(
-             <MenuItem onClick={jack2} id={index} value={50} key={index}>{i}</MenuItem>
+             <MenuItem onClick={branch} id={index} value={50} key={index}>{i}</MenuItem>
             ))}
     </div>
     </Menu>
@@ -169,7 +138,7 @@ return(
     >
         <div className={style.ss} onMouseLeave={close}>
         {ff.map((i,index)=>(
-            <MenuItem onClick={jack2} id={index} value={60} key={index}>{i}</MenuItem>
+            <MenuItem onClick={branch} id={index} value={60} key={index}>{i}</MenuItem>
             ))}
     </div>
     </Menu>
@@ -186,7 +155,7 @@ return(
     >
         <div className={style.ss} onMouseLeave={close}>
         {gg.map((i,index)=>(
-             <MenuItem onClick={jack2} id={index} value={70} key={index}>{i}</MenuItem>
+             <MenuItem onClick={branch} id={index} value={70} key={index}>{i}</MenuItem>
             ))}
     </div>
     </Menu>
@@ -203,7 +172,7 @@ return(
     >
         <div className={style.ss} onMouseLeave={close}>
         {areacode.map((i,index)=>(
-          <MenuItem onClick={jack2} id={index} value={80} key={index}>{i}</MenuItem>
+          <MenuItem onClick={branch} id={index} value={80} key={index}>{i}</MenuItem>
             ))}
     </div>
     </Menu>

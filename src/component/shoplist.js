@@ -1,15 +1,13 @@
 import * as React from 'react';
 import style from '../style.module.css'
 import MediaQuery from 'react-responsive';
-import { Button, Card, CardContent, Container, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { memo } from 'react';
-import { useState } from "react";
-
 
 const Shoplist=memo((shop)=> {
 
-    const{list,page,shopamount}=shop
-    console.log('list');
+    const{list,page}=shop
+
   const per = 10;
 
 
@@ -19,13 +17,9 @@ const Shoplist=memo((shop)=> {
 <Grid container className={style.kkk}>
 {list.slice(page,page+per).map((item,i)=>(
   
-  // <Ppp>
   
   <Grid item xs={12} sm={6} key={i} >
 <li key={i}> 
-
-      {/* <img src={item.logo_image} alt="" /> */}
-    {/* <Card> */}
     <div className={style.main}>
 
     <MediaQuery query='(min-width:961px)'>

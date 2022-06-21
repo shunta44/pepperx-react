@@ -5,9 +5,7 @@ import { memo } from 'react';
 
 
 const Pagenation=memo((page)=> {
-    console.log('nation');
 
-    
     const{count,amount,change,numbercolor}=page
 
     return(

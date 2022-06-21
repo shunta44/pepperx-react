@@ -1,197 +1,731 @@
-import logo from './logo.svg';
-import './App.css';
-import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
-import styled from '@emotion/styled';
-import style from './style.module.css'
-import { makeStyles } from '@mui/material';
-import { useRef } from 'react';
+import * as React from "react";
 
-// 別ファイルのCSSを読み込む場合
-// importした時点でbodyやliなど既存のタグへのスタイルは反映される
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
+import style from "./style.module.css";
 
-// CSS in Jsにする場合
-// makeStylesは非水準
-// react18では使えない→エラーになる
-// material-uiの推奨はemotion派生のstyled記述
+import { useLocation } from "react-router";
+import { useRef } from "react";
+import { useCallback } from 'react';
 
-// const st =makeStyles(()=>({
-//   kk:{
-//       listStyle:'none'
-//   }
-// }))
+import Areaselect from "./component/areaselect";
+import Conditionbutton from "./component/conditionbutton";
+import Shoplist from "./component/shoplist";
+import Pagenation from "./component/pagenation";
+import Conditionstatus from "./component/conditionstatus";
+import Loading from "./loading";
+import { memo } from "react";
+import { animateScroll } from "react-scroll";
+import { Link } from "react-router-dom";
 
-const Ppp=styled('li')({
-listStyle:'none'
-})
+const App=memo(()=> {
+
+  const [tokyo, settokyo] = useState([]);
+  const [tokyo2, settokyo2] = useState([]);
+  const [money, setmoney] = useState([]);
+  const [expanded, setexpanded] = useState(false);
+  const [loading, setloading] = useState(false);
+  const [val, setval] = useState(0);
+  const [pages, setpage] = useState(0);
+  const [search, setsearch] = useState("");
+  const [pagenumber, setpagenumber] = useState(1);
+  const per = 10;
+
+  const [joker, setjoker] = useState("");
+  const [joker2, setjoker2] = useState("");
+
+  const [condition, setcondition] = useState("");
+  const [areacondition, setarescondition] = useState("");
+  const [firsttext, setfirsttext] = useState(
+    "特別なシーンにおすすめなお店をピックアップ！\n上記タブからエリアを絞れます"
+  );
+  const [error, seterror] = useState("");
+
+  const mes =
+  "指定した条件にマッチするお店がありません。\n条件を変えてください";
+  
+  const uuu = useLocation();
+  
+  const one = uuu.state.i;
+  const two = uuu.state.p;
+  
+  const mix = one + two;
+  
+  
+  let areacodefirst = "";
+  const areacode = useRef(areacodefirst);
+  let detailareacode = '';
+  const areacode2 = useRef(detailareacode);
+  
+  useEffect(() => {
+      switch (mix) {
+        case "100":
+          areacodefirst = "Z041"
+          areacode.current = areacodefirst;
+          break;
+        case "101":
+          areacodefirst = "Z051";
+          areacode.current = areacodefirst;
+          break;
+        case "102":
+          areacodefirst = "Z052";
+          areacode.current = areacodefirst;
+          break;
+        case "103":
+          areacodefirst = "Z053";
+          areacode.current = areacodefirst;
+          break;
+        case "104":
+          areacodefirst = "Z054";
+          areacode.current = areacodefirst;
+          break;
+        case "105":
+          areacodefirst = "Z055";
+          areacode.current = areacodefirst;
+          break;
+        case "106":
+          areacodefirst = "Z056";
+          areacode.current = areacodefirst;
+          break;
+  
+        case "200":
+          areacodefirst = "Z011";
+          areacode.current = areacodefirst;
+          break;
+        case "201":
+          areacodefirst = "Z012";
+          areacode.current = areacodefirst;
+          break;
+        case "202":
+          areacodefirst = "Z013";
+          areacode.current = areacodefirst;
+          break;
+        case "203":
+          areacodefirst = "Z014";
+          areacode.current = areacodefirst;
+          break;
+        case "204":
+          areacodefirst = "Z015";
+          areacode.current = areacodefirst;
+          break;
+        case "205":
+          areacodefirst = "Z016";
+          areacode.current = areacodefirst;
+          break;
+        case "206":
+          areacodefirst = "Z017";
+          areacode.current = areacodefirst;
+          break;
+  
+        case "300":
+          areacodefirst = "Z061";
+          areacode.current = areacodefirst;
+          break;
+        case "301":
+          areacodefirst = "Z062";
+          areacode.current = areacodefirst;
+          break;
+        case "302":
+          areacodefirst = "Z063";
+          areacode.current = areacodefirst;
+          break;
+        case "303":
+          areacodefirst = "Z064";
+          areacode.current = areacodefirst;
+          break;
+        case "304":
+          areacodefirst = "Z065";
+          areacode.current = areacodefirst;
+          break;
+        case "305":
+          areacodefirst = "Z066";
+          areacode.current = areacodefirst;
+          break;
+  
+        case "400":
+          areacodefirst = "Z031";
+          areacode.current = areacodefirst;
+          break;
+        case "401":
+          areacodefirst = "Z032";
+          areacode.current = areacodefirst;
+          break;
+        case "402":
+          areacodefirst = "Z033";
+          areacode.current = areacodefirst;
+          break;
+        case "403":
+          areacodefirst = "Z034";
+          areacode.current = areacodefirst;
+          break;
+  
+        case "500":
+          areacodefirst = "Z021";
+          areacode.current = areacodefirst;
+          break;
+        case "501":
+          areacodefirst = "Z022";
+          areacode.current = areacodefirst;
+          break;
+        case "502":
+          areacodefirst = "Z023";
+          areacode.current = areacodefirst;
+          break;
+        case "503":
+          areacodefirst = "Z024";
+          areacode.current = areacodefirst;
+          break;
+        case "504":
+          areacodefirst = "Z025";
+          areacode.current = areacodefirst;
+          break;
+        case "505":
+          areacodefirst = "Z026";
+          areacode.current = areacodefirst;
+          break;
+  
+        case "600":
+          areacodefirst = "Z071";
+          areacode.current = areacodefirst;
+          break;
+        case "601":
+          areacodefirst = "Z072";
+          areacode.current = areacodefirst;
+          break;
+        case "602":
+          areacodefirst = "Z073";
+          areacode.current = areacodefirst;
+          break;
+        case "603":
+          areacodefirst = "Z074";
+          areacode.current = areacodefirst;
+          break;
+        case "604":
+          areacodefirst = "Z075";
+          areacode.current = areacodefirst;
+          break;
+  
+        case "700":
+          areacodefirst = "Z081";
+          areacode.current = areacodefirst;
+          break;
+        case "701":
+          areacodefirst = "Z082";
+          areacode.current = areacodefirst;
+          break;
+        case "702":
+          areacodefirst = "Z083";
+          areacode.current = areacodefirst;
+          break;
+        case "703":
+          areacodefirst = "Z084";
+          areacode.current = areacodefirst;
+          break;
+  
+        case "800":
+          areacodefirst = "Z091";
+          areacode.current = areacodefirst;
+          break;
+        case "801":
+          areacodefirst = "Z092";
+          areacode.current = areacodefirst;
+          break;
+        case "802":
+          areacodefirst = "Z093";
+          areacode.current = areacodefirst;
+          break;
+        case "803":
+          areacodefirst = "Z094";
+          areacode.current = areacodefirst;
+          break;
+        case "804":
+          areacodefirst = "Z095";
+          areacode.current = areacodefirst;
+          break;
+        case "805":
+          areacodefirst = "Z096";
+          areacode.current = areacodefirst;
+          break;
+        case "806":
+          areacodefirst = "Z097";
+          areacode.current = areacodefirst;
+          break;
+        case "807":
+          areacodefirst = "Z098";
+          areacode.current = areacodefirst;
+          break;
+  
+        default:
+          break;
+      }
 
 
-function App() {
+  }, []);
 
-  const[shopp,setshop]=useState([])
-  const[search,setsearch]=useState('')
-  // const ser=useRef(null)
+  useEffect(() => {
+    axios
+    .get(
+      "https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/middle_area/v1/?format=json&key=52f717020342571a"
+      )
+      .then(function (nn) {
+        settokyo(nn.data.results.middle_area);
+      })
+      .catch((error) => console.log(error));
+    }, []);
 
-  const KEY='52f717020342571a';
-
-  const word=(e)=>{
-setsearch(e.target.value);
-console.log(88)
-}
-
-const word2=(e)=>{
-
-  // e.preventDefault()
     
-    if (search==='') {
-      alert('文字を入力してください');
+    useEffect(() => {
+      setloading(true)
+      axios
+      .get(
+        `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&large_area=${areacodefirst}&special_category=SPG5&count=50`
+        )
+      .then(function (nn) {
+        settokyo2(nn.data.results.shop);
+        setloading(false)
+      })
+      .catch((error) => {
+        console.log(error)
+        setloading(false)
+      });
+  }, [areacodefirst]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/budget/v1/?format=json&key=52f717020342571a"
+      )
+      .then(function (nn) {
+        
+        setmoney(nn.data.results.budget);
+      })
+      .catch((error) => console.log(error));
+    }, []);
+    
+    let areacodedone = areacode.current;
+    let bb = tokyo.filter((item) => item.large_area.code === areacodedone);
+    let gg = tokyo2.map((i) => i.middle_area.code).shift();
+
+    const dd =useCallback( (data, index, a) => {
+      setpage((index - 1) * per);
+      setpagenumber(index);
+      animateScroll.scrollToTop()
+      console.log(1);
+  },[]);
+
+
+  const area =useCallback( (event, expanded) => {
+    setexpanded(expanded);
+    console.log(2);
+  },[]);
+
+  const areachange =useCallback( (t) => {
+    setloading(true)
+
+    const code = t.target.id;
+    const code2 = t.target.value;
+    setfirsttext("");
+
+    axios
+      .get(
+        `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${code}&count=50`
+      )
+      .then(function (nn) {
+        settokyo2(nn.data.results.shop);
+        setloading(false)
+
+      })
+      .catch((error) =>{
+        console.log(error)
+        setloading(false)
+      } 
+      );
+
+    setexpanded(false);
+    setval(0);
+    setcondition("");
+    setjoker("");
+    setjoker2("");
+    setarescondition(code2);
+    setpage(0);
+    setpagenumber(1);
+    seterror("");
+  },[]);
+
+  const click=useCallback((e)=>{
+    if (firsttext!=='') {
+      alert('最初にエリアを選択してください')
       return;
     }
-    const ww=search;
-    axios.get(`https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&keyword=${ww}`)
-    // axios.get(`https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&name_any=${ww}`)
-    .then(function(kk){
-      setshop(kk.data.results.shop)
-    })
-    .catch(error=>console.log(error))
+    setloading(true)
+    let url = "";
+
+    if (gg == null) {
+      gg = areacode2.current;
+
+    }
+
+    if (error !== "") {
+      seterror("");
+    }
+    setpage(0);
+    setpagenumber(1);
     
-    setsearch('')
-    console.log(ww)  
+    switch (e.target.value) {
+      case '10':
+        setjoker("private_room=1");
+        setcondition("個室あり");
+        if (joker2 !== "") {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&private_room=1&count=50&${joker2}`;
+        } else{
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&private_room=1&count=50`;
+    }
+        break;
+      case '20':
+    setjoker("free_food=1");
+    setcondition("食べ放題あり");
+    console.log(joker)
+    if (joker2 !== "") {
+      url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&free_food=1&count=50&${joker2}`;
+    } else{
+      url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&free_food=1&count=50`;
+    }
+        break;
+      case '30':
+    setjoker("free_drink=1");
+    setcondition("飲み放題あり");
+    if (joker2 !== "") {
+      url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&free_drink=1&count=50&${joker2}`;
+    } else{
+      url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&free_drink=1&count=50`;
+    }
+        break;
+      case '40':
+    setjoker("parking=1");
+    setcondition("駐車場あり");
+    if (joker2 !== "") {
+      url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&parking=1&count=50&${joker2}`;
+    } else{
+      url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&parking=1&count=50`;
+    }
+        break;
+      case '50':
+    setjoker("lunch=1");
+    setcondition("ランチあり");
+    if (joker2 !== "") {
+      url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&lunch=1&count=50&${joker2}`;
+    } else{
+      url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&lunch=1&count=50`;
+    }
+        break;
+      case '60':
+    setval(0);
+    setcondition("");
+    setjoker("");
+    setjoker2("");
+    url=`https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&count=50`
+        break;
+    
+      default:
+        break;
+
+      }
+
+    axios
+    .get(url)
+
+    .then(function (nn) {
+      settokyo2(nn.data.results.shop);
+      setloading(false)
+      const data = nn.data.results.shop;
+      if (data.length === 0) {
+        seterror(mes);
+        areacode2.current = gg;
+        detailareacode = bb;
+      }
+    })
+    .catch((error) =>console.log(error));
+
+  },[tokyo2])
+
+
+  const moneychange =useCallback( (e) => {
+    console.log(1000);
+    
+    if (firsttext!=='') {
+      alert('最初にエリアを選択してください')
+      return;
+    }
+    setloading(true)
+    if (gg == null) {
+      gg   = areacode2.current;
+    }
+    
+    if (error !== "") {
+      seterror("");
+    }
   
-  }
+    const x = money.map((i) => i.code);
+    let url = "";
+    setpage(0);
+    setpagenumber(1);
 
-  const word3=(e)=>{
-    if (e.key==='Enter') {
+    switch (e.target.value) {
+      case "10":
+        const amount = x.slice(0, 2);
+        console.log(amount);
+        setval(10);
+        setjoker2(`budget=${amount}`);
 
-      // alert('uuuuu');
-      if (search==='') {
-        alert('文字を入力してください');
+        if (joker !== "") {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount}&count=50&${joker}`;
+        } else {
+        url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount}&count=50`;
+        }
+
+        break;
+
+      case "20":
+        const amount2 = x.slice(2, 4);
+        console.log(amount2);
+        setval(20);
+        setjoker2(`budget=${amount2}`);
+
+        if (joker !== "") {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount2}&count=50&${joker}`;
+        } else {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount2}&count=50`;
+        }
+
+        break;
+
+      case "30":
+        const amount3 = x.slice(4, 5);
+        console.log(amount3);
+        setval(30);
+        setjoker2(`budget=${amount3}`);
+
+        if (joker !== "") {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount3}&count=50&${joker}`;
+        } else {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount3}&count=50`;
+        }
+
+        break;
+
+      case "40":
+        const amount4 = x.slice(5, 7);
+        console.log(amount4);
+        setval(40);
+        setjoker2(`budget=${amount4}`);
+
+        if (joker !== "") {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount4}&count=50&${joker}`;
+        } else {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount4}&count=50`;
+        }
+
+        break;
+
+      case "50":
+        const amount5 = x.slice(7, 9);
+        console.log(amount5);
+        setval(50);
+        setjoker2(`budget=${amount5}`);
+
+        if (joker !== "") {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount5}&count=50&${joker}`;
+        } else {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount5}&count=50`;
+        }
+
+        break;
+
+      case "60":
+        const amount6 = x.slice(9, 11);
+        console.log(amount6);
+        setval(60);
+        setjoker2(`budget=${amount6}`);
+
+        if (joker !== "") {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount6}&count=50&${joker}`;
+        } else {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount6}&count=50`;
+        }
+        break;
+
+      case "70":
+        const amount7 = x.slice(11, 12);
+        console.log(amount7);
+
+        setval(70);
+        setjoker2(`budget=${amount7}`);
+
+        if (joker !== "") {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount7}&count=50&${joker}`;
+        } else {
+          url = `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&middle_area=${gg}&budget=${amount7}&count=50`;
+        }
+
+        break;
+
+      default:
+        break;
+    }
+
+    axios
+    .get(url)
+    .then(function (nn) {
+      settokyo2(nn.data.results.shop);
+      setloading(false)
+      const data = nn.data.results.shop;
+            if (data.length === 0) {
+              seterror(mes);
+              areacode2.current = gg;
+            }
+    })
+    .catch((error) => console.log(error));
+
+  },[tokyo2]);
+
+  const word = (e) => {
+    if (firsttext!=='') {
+      alert('最初にエリアを選択してください')
+      return;
+    }
+    setsearch(e.target.value);
+  };
+
+  const word2 = (e) => {
+    let gg = tokyo2.map((i) => i.middle_area.code).shift();
+    const ww = search;
+
+    if (search === "") {
+      alert("文字を入力してください");
+      return;
+    }
+    if (gg == null) {
+      gg   = areacode2.current;
+    }
+    setloading(true)
+    axios
+      .get(
+        `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&name_any=${ww}&middle_area=${gg}&count=50`
+      )
+      .then(function (kk) {
+        settokyo2(kk.data.results.shop);
+      setloading(false)
+        const data = kk.data.results.shop;
+        if (data.length === 0) {
+          seterror(mes);
+          areacode2.current = gg;
+        }
+      })
+      .catch((error) => console.log(error));
+
+    setsearch("");
+    setcondition(`店名検索・キーワード「${search}」`);
+    setval(0);
+    setpage(0);
+    setpagenumber(1);
+  };
+
+  const word3 = (e) => {
+    let gg = tokyo2.map((i) => i.middle_area.code).shift();
+    const ww = search;
+
+    if (e.key === "Enter") {
+      if (search === "") {
+        alert("文字を入力してください");
         return;
       }
-      const ww=search;
-      axios.get(`https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&name_any=${ww}`)
-      .then(function(kk){
-        setshop(kk.data.results.shop)
-      })
-      .catch(error=>console.log(error))
-      
-      setsearch('')
-      console.log(ww) 
+      if (gg == null) {
+        gg   = areacode2.current;
+      }
+      setloading(true)
+      axios
+        .get(
+          `https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&name_any=${ww}&middle_area=${gg}&count=50`
+        )
+        .then(function (kk) {
+          settokyo2(kk.data.results.shop);
+          const data = kk.data.results.shop;
+      setloading(false)
+          if (data.length === 0) {
+            seterror(mes);
+            areacode2.current = gg;
+          }
+        })
+        .catch((error) => console.log(error));
+
+      setsearch("");
+    setcondition(`店名検索→キーワード「${search}」`);
+      setval(0);
+      setpage(0);
+      setpagenumber(1);
     }
+  };
+
+    window.addEventListener('popstate',e=>{
+        window.location.reload();
+     
+    })
+  
+
+  const display=()=>{
+
+    return(
+<>
+       <Areaselect
+        areacode={bb}
+        change={areachange}
+        change2={area}
+        expanded={expanded}
+      />
+      <Conditionbutton
+        click={click}
+        val={val}
+        change={moneychange}
+      />
+
+      <div className={style.in}>
+        <input
+          type="text"
+          value={search}
+          onChange={word}
+          placeholder="店名で検索"
+          onKeyDown={word3}
+        />
+        <button onClick={word2}>検索</button>
+        <div>
+      <Link to={'/'} className={style.backbtn}>都道府県の選択へ戻る</Link>
+        </div>
+      </div>
+
+      <p className={style.first}>{firsttext}</p>
+      <Conditionstatus m={areacondition} mm={condition}/>
+      <p className={style.error}>{error}</p>
+
+      <Shoplist list={tokyo2} 
+      page={pages} 
+      />
+
+      <Pagenation
+        count={tokyo2}
+        amount={per}
+        change={dd}
+        numbercolor={pagenumber}
+      /> 
+        </>
+    )
   }
 
-// const hot=useCallback(()=>{
-// },[])
-
-const url=axios.create({
-  baseURL:'https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1'
+  return (
+    <>
+{loading?<Loading/>:display()}
+    </>
+  );
 })
-
-const axx=async()=>{
-  return(
-    await url.get('',{
-      params: {
-        key:KEY,
-        large_area:'Z011',
-        format: 'json',
-     }
-    })
-  )
-  // url.get('key=52f717020342571a&large_area=Z011')
-}
-// const axx=()=>{
-//   url.get('key=52f717020342571a&large_area=Z011')
-// }
-
-// const fish=()=>{
-//   console.log(qq)
-// }
-
-useEffect(()=>{
-
-
-  // axios.get('https://api-cors4544545454.herokuapp.com/https://webservice.recruit.co.jp/hotpepper/special/v1/?format=json&key=52f717020342571a&special_category')
-  // axios.get('https://api-cors4544545454.herokuapp.com/https://webservice.recruit.co.jp/hotpepper/special/v1/?format=json&key=sample&special_category=SPG6')
-  // axios.get('https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&special&count=5')
-  axios.get('https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&large_area=Z011&count=5')
-  // axios.get('https://api-cors4544545454.herokuapp.com/http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?format=json&key=52f717020342571a&large_area=Z011&karaoke=1&count=5')
-  // axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=52f717020342571a&large_area=Z011')
-  // axx()
-  .then(function(nn){
-    // console.log('qqqqq')
-    // console.log(nn.data.results)
-    // console.log(nn.data.results)
-    // console.log(nn.data.shop)
-    // console.log(nn.data.shop)
-    // setshop(nn.data.shop)
-  // setshop(nn.data)
-  // setshop(nn.data.results.special)
-  setshop(nn.data.results.shop)
-    // console.log(shop)
-  })
-  
-  .catch(error => console.log(error))
-},[])
-
-
-
-return (
-<>
-<div>
-
-{/* <input type="text"  rr={ser} placeholder='店名を入力' onKeyDown={word3} /> */}
-<input type="text" value={search} onChange={word} placeholder='店名を入力' onKeyDown={word3} />
-<button onClick={word2}>検索</button>
-</div>
-{/* {shopp.map(item=>(
-  <ul>
-    <li>
-    <p>{item.name}</p>
-    <p>{item.code}</p>
-
-    </li>
-  </ul>
-))} */}
-
-<ul>
-{shopp.map(item=>(
-    
-// {/* <Ppp>  */}
-
-<li > 
-
-      {/* <img src={item.logo_image} alt="" /> */}
-<img src={item.photo.pc.l} alt="" />
-<p>{item.name}</p>
-<a href={item.urls.pc} target='branch'>クリック</a>
-<p>住所→{item.address}</p>
-<p>最寄り駅→{item.station_name}</p>
-<p>アクセス→{item.access}</p>
-<p>飲み放題→{item.free_drink}</p>
-<p>23時以降の営業→{item.midnight}</p>
-<p>予算→{item.budget.average}</p>
-<p>営業時間→{item.open}</p>
-<p>駐車場→{item.parking}</p>
-<p>個室→{item.private_room}</p>
-  </li> 
-
-// </Ppp>
-
-    
-))}
-</ul>
-
-
-{/* <img src="" alt="" /> */}
-
-{/* Powered by <a href="http://webservice.recruit.co.jp/">ホットペッパー Webサービス</a> */}
-<br />
-
-{/* <a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパー Webサービス" width="135" height="17" border="0" title="ホットペッパー Webサービス"/></a> */}
-
-</>
-);
-
-}
 
 export default App;

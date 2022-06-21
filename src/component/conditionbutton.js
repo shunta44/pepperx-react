@@ -1,18 +1,16 @@
 import * as React from 'react';
-import { Button, Card, CardContent, Container, Grid, styled } from "@mui/material";
+import { Button,Grid } from "@mui/material";
 import MediaQuery from 'react-responsive';
 import style from '../style.module.css'
+import { memo } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
-import { memo } from 'react';
 
 const Conditionbutton=memo((btn)=> {
-  console.log('btn');
 
-    const{condition1,condition2,condition3,condition4,condition5,conditionreset,val,change,click}=btn
-
+    const{val,change,click}=btn
 
     return(
         <Grid container>
@@ -47,7 +45,6 @@ const Conditionbutton=memo((btn)=> {
   金額
         </InputLabel>
         <NativeSelect
-          // defaultValue={0}
           value={val}
           inputProps={{
             name: 'age',
