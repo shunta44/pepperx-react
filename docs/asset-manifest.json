@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.91c59103.css",
-    "main.js": "/static/js/main.a48aaa0f.js",
-    "static/js/787.c2045793.chunk.js": "/static/js/787.c2045793.chunk.js",
-    "static/media/meatphoto.jpg": "/static/media/meatphoto.eaecd8851fa120d75b57.jpg",
-    "index.html": "/index.html",
-    "main.91c59103.css.map": "/static/css/main.91c59103.css.map",
-    "main.a48aaa0f.js.map": "/static/js/main.a48aaa0f.js.map",
-    "787.c2045793.chunk.js.map": "/static/js/787.c2045793.chunk.js.map"
+    "main.css": "/pepperx-react/static/css/main.0a7c801c.css",
+    "main.js": "/pepperx-react/static/js/main.2b9b7c1b.js",
+    "static/js/787.c2045793.chunk.js": "/pepperx-react/static/js/787.c2045793.chunk.js",
+    "static/media/meatphoto.jpg": "/pepperx-react/static/media/meatphoto.eaecd8851fa120d75b57.jpg",
+    "index.html": "/pepperx-react/index.html",
+    "main.0a7c801c.css.map": "/pepperx-react/static/css/main.0a7c801c.css.map",
+    "main.2b9b7c1b.js.map": "/pepperx-react/static/js/main.2b9b7c1b.js.map",
+    "787.c2045793.chunk.js.map": "/pepperx-react/static/js/787.c2045793.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.91c59103.css",
-    "static/js/main.a48aaa0f.js"
+    "static/css/main.0a7c801c.css",
+    "static/js/main.2b9b7c1b.js"
   ]
 }
